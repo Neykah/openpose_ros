@@ -19,8 +19,14 @@ class OpenPose3dficator
 {
     public:
         OpenPose3dficator(const ros::Publisher&, const std::vector<float>&);
-        void MakePoint3d(const openpose_ros_msgs::PointWithProb&, openpose_ros_msgs::PointWithProb3d);
-        void MakeHuman3d(const openpose_ros_msgs::OpenPoseHuman&, openpose_ros_msgs::OpenPoseHuman3d&);
+        void MakePoint3d(const openpose_ros_msgs::PointWithProb&, 
+                         const sensor_msgs::ImageConstPtr& depth_image, 
+                         openpose_ros_msgs::PointWithProb3d&);
+
+        void MakeHuman3d(const openpose_ros_msgs::OpenPoseHuman&, 
+                         const sensor_msgs::ImageConstPtr& depth_image, 
+                         openpose_ros_msgs::OpenPoseHuman3d&);
+
         void CallBack(const sensor_msgs::ImageConstPtr&, const openpose_ros_msgs::OpenPoseHumanListConstPtr&);
 
     private:
