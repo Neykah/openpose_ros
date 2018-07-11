@@ -24,6 +24,8 @@ find_package(OpenPose REQUIRED)
 
 catkin_package(
    INCLUDE_DIRS include
+   LIBRARIES
+    openpose3dficator
    CATKIN_DEPENDS roscpp rospy std_msgs
 )
 
@@ -50,3 +52,14 @@ target_link_libraries(${PROJECT_NAME}_node
   ${GFLAGS_LIBRARY} 
   ${GLOG_LIBRARY} 
 )
+
+# Executables
+add_executable(openpose3d_node src/openpose3dfy.cpp)
+set_target_properties(openpose3d_node PROPERTIES OUTPUT_NAME openpose3d_node PREFIX "")
+add_dependencies(openpose3d_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(openpose3d_node openpose3dficator ${catkin_LIBRARIES})
+
+# Libraries
+add_library(openpose3dficator src/openpose3dficator.cpp)
+add_dependencies(openpose3dficator ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(openpose3dficator ${catkin_LIBRARIES})
