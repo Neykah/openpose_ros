@@ -17,8 +17,11 @@ add_message_files(
   FILES
   BoundingBox.msg
   OpenPoseHuman.msg
+  OpenPoseHuman3d.msg
   OpenPoseHumanList.msg
+  OpenPoseHumanList3d.msg
   PointWithProb.msg
+  PointWithProb3d.msg
 )
 
 generate_messages(
