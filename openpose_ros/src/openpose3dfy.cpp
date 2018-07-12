@@ -21,7 +21,6 @@ int main(int argc, char** argv)
     // Initialise ROS
     ros::init(argc, argv, "openpose3d");
     ros::NodeHandle nh;
-    ROS_INFO("Wait to receive camera info.");
 
     ros::Publisher keypoints3d_publisher = nh.advertise<openpose_ros_msgs::OpenPoseHumanList3d>("openpose_ros/human_list3d", 1, true);
     openpose_ros::OpenPose3dficator to_3d(keypoints3d_publisher);
