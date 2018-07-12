@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   cv_bridge
   image_transport
+  pcl_ros
 )
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
@@ -21,12 +22,18 @@ find_package(OpenCV REQUIRED)
 find_package(GFlags)
 find_package(Glog)
 find_package(OpenPose REQUIRED)
+find_package(PCL 1.3 REQUIRED COMPONENTS common io)
 
 catkin_package(
    INCLUDE_DIRS include
    LIBRARIES
     openpose3dficator
-   CATKIN_DEPENDS roscpp rospy std_msgs
+   CATKIN_DEPENDS 
+    roscpp 
+    rospy 
+    std_msgs
+    pcl_ros
+    sensor_msgs
 )
 
 include_directories( 
@@ -38,6 +45,7 @@ include_directories(
   ${GFLAGS_INCLUDE_DIR} 
   ${GLOG_INCLUDE_DIR} 
   ${OpenCV_INCLUDE_DIRS}
+  ${PCL_INCLUDE_DIRS}
 )
 
 add_executable(${PROJECT_NAME}_node src/openpose_ros_node.cpp src/openpose.cpp src/openpose_ros_io.cpp 
@@ -62,4 +70,4 @@ target_link_libraries(openpose3d_node openpose3dficator ${catkin_LIBRARIES})
 # Libraries
 add_library(openpose3dficator src/openpose3dficator.cpp)
 add_dependencies(openpose3dficator ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(openpose3dficator ${catkin_LIBRARIES})
+target_link_libraries(openpose3dficator ${catkin_LIBRARIES} ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES})

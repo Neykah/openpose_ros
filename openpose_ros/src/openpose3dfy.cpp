@@ -14,7 +14,7 @@
 #include "openpose_ros_msgs/OpenPoseHumanList3d.h"
 #include "openpose3dficator.h"
 
-typedef message_filters::sync_policies::ApproximateTime<sensor_msgs::Image, openpose_ros_msgs::OpenPoseHumanList> NoSyncPolicy;
+typedef message_filters::sync_policies::ApproximateTime<sensor_msgs::PointCloud2, openpose_ros_msgs::OpenPoseHumanList> NoSyncPolicy;
 
 int main(int argc, char** argv)
 {
